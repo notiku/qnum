@@ -1,0 +1,9 @@
+[package]
+name = "notiku/qnum"
+description = "Big-number library designed for incremental games."
+version = "0.1.0"
+license = "MIT"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
