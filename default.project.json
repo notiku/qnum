@@ -1,6 +1,7 @@
 {
   "name": "qnum",
   "tree": {
+    "$className": "ModuleScript",
     "$path": "src"
   }
 }
