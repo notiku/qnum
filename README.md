@@ -8,7 +8,7 @@ Add to your `wally.toml`:
 
 ```toml
 [dependencies]
-QNum = "notiku/qnum@0.2.0"
+QNum = "notiku/qnum@0.2.1"
 ```
 
 Then run:
