@@ -6,7 +6,7 @@ local Compare = require(script.Compare)
 local Format = require(script.Format)
 local Types = require(script.Types)
 
-type QNumValue = {
+export type QNumValue = {
 	mantissa: number,
 	exponent: number,
 }
