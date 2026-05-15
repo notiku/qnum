@@ -8,7 +8,7 @@ Add to your `wally.toml`:
 
 ```toml
 [dependencies]
-QNum = "notiku/qnum@0.1.2"
+QNum = "notiku/qnum@0.2.0"
 ```
 
 Then run:
@@ -56,7 +56,7 @@ print(QNum.toScientific(total)) --> 2.50e9
 | `QNum.format(value, decimals?)`       | `1.25M`                       |
 | `QNum.toScientific(value, decimals?)` | `1.25e6`                      |
 | `QNum.withSuffix(value, decimals?)`   | `1.25M`                       |
-| `QNum.getSuffix(index)`               | `"k"`, `"M"`, `"B"`, `"U"`, … |
+| `QNum.getSuffix(index)`               | `"k"`, `"M"`, `"B"`, `"T"`, … |
 | `QNum.getSuffixIndex(suffix)`         | Inverse of `getSuffix`.       |
 
 `tostring(value)` is equivalent to `QNum.format(value)`.

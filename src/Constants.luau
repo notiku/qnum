@@ -2,32 +2,27 @@
 
 local Constants = {}
 
+-- Base suffixes for the first three magnitudes (10^3, 10^6, 10^9).
+-- Larger magnitudes are generated combinatorially from the -illion tables below.
 Constants.SETS = { "k", "M", "B" }
 
+-- Ones-place prefixes for the n-th -illion (Un-, Duo-, Tre-, Quattuor-, Quin-, ...).
+-- Index 1 is the empty prefix used when the ones digit is zero.
+-- Doubles as the standalone suffix for n in 3..9: T, Qd, Qn, Sx, Sp, Oc, No.
 Constants.FIRST_ONES = {
 	"", "U", "D", "T", "Qd", "Qn", "Sx", "Sp", "Oc", "No"
 }
 
+-- Tens-place suffixes (Decillion, Vigintillion, Trigintillion, ...).
+-- Index 1 is the empty suffix used when the tens digit is zero.
 Constants.SECOND_ONES = {
-	"", "De", "Vg", "Tg", "Qag", "Qig", "Sxg", "Spg", "Ocg", "Nog"
+	"", "Dc", "Vg", "Tg", "Qag", "Qig", "Sxg", "Spg", "Ocg", "Nog"
 }
 
+-- Hundreds-place suffixes (Centillion, Ducentillion, Trecentillion, ...).
+-- Index 1 is the empty suffix used when the hundreds digit is zero.
 Constants.THIRD_ONES = {
-	"", "Ce", "Du", "Tr", "Qa", "Qi", "Se", "Si", "Ot", "Ni"
-}
-
-Constants.MULT_ONES = {
-	"", "Mi", "Mc", "Na", "Pi", "Fm", "At", "Zp", "Yc", "Xo", "Ve", "Me",
-	"Due", "Tre", "Te", "Pt", "He", "Hp", "Oct", "En", "Ic", "Mei",
-	"Dui", "Tri", "Teti", "Pti", "Hei", "Hp", "Oci", "Eni", "Tra", "TeC",
-	"MTc", "DTc", "TrTc", "TeTc", "PeTc", "HTc", "HpT", "OcT", "EnT", "TetC",
-	"MTetc", "DTetc", "TrTetc", "TeTetc", "PeTetc", "HTetc", "HpTetc", "OcTetc", "EnTetc",
-	"PcT", "MPcT", "DPcT", "TPCt", "TePCt", "PePCt", "HePCt", "HpPct", "OcPct", "EnPct",
-	"HCt", "MHcT", "DHcT", "THCt", "TeHCt", "PeHCt", "HeHCt", "HpHct", "OcHct", "EnHct",
-	"HpCt", "MHpcT", "DHpcT", "THpCt", "TeHpCt", "PeHpCt", "HeHpCt", "HpHpct", "OcHpct", "EnHpct",
-	"OCt", "MOcT", "DOcT", "TOCt", "TeOCt", "PeOCt", "HeOCt", "HpOct", "OcOct", "EnOct",
-	"Ent", "MEnT", "DEnT", "TEnt", "TeEnt", "PeEnt", "HeEnt", "HpEnt", "OcEnt", "EnEnt",
-	"Hect", "MeHect"
+	"", "Ce", "Dn", "Tc", "Qac", "Qic", "Sxc", "Spc", "Occ", "Noc"
 }
 
 return Constants

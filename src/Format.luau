@@ -10,7 +10,23 @@ local IndexBySuffix: { [string]: number } = {}
 
 local Format = {}
 
--- Generates a suffix without using the cache.
+--[[
+	Generates a suffix for a suffix index using American short-scale naming.
+
+	Index examples:
+		1   -> k       (thousand,   10^3)
+		2   -> M       (million,    10^6)
+		3   -> B       (billion,    10^9)
+		4   -> T       (trillion,   10^12)
+		5   -> Qd      (quadrillion, 10^15)
+		11  -> Dc      (decillion,  10^33)
+		12  -> UDc     (undecillion, 10^36)
+		21  -> Vg      (vigintillion, 10^63)
+		101 -> Ce      (centillion, 10^303)
+		111 -> DcCe    (decicentillion, 10^333)
+
+	For n >= 1000 (beyond nongentillion), falls back to scientific-like text.
+]]
 local function generateSuffix(index: number): string
 	if index <= 0 then
 		return ""
@@ -20,56 +36,22 @@ local function generateSuffix(index: number): string
 		return Constants.SETS[index]
 	end
 
-	local adjustedIndex = index - #Constants.SETS
+	-- n is the ordinal in the -illion sequence (million=1, billion=2, ...).
+	local n = index - 1
 
-	local firstIndex = adjustedIndex % 10
-	local secondIndex = math.floor(adjustedIndex / 10) % 10
-	local thirdIndex = math.floor(adjustedIndex / 100) % 10
-	local multIndex = math.floor(adjustedIndex / 1000) + 1
-
-	local first = Constants.FIRST_ONES[firstIndex + 1] or ""
-	local second = Constants.SECOND_ONES[secondIndex + 1] or ""
-	local third = Constants.THIRD_ONES[thirdIndex + 1] or ""
-	local mult = Constants.MULT_ONES[multIndex] or ("e" .. tostring(adjustedIndex * 3))
-
-	return first .. second .. third .. mult
-end
-
---[[
-	Generates a suffix for a suffix index.
-
-	Index examples:
-		1 -> k
-		2 -> M
-		3 -> B
-		4 -> U
-		14 -> UDe
-
-	If the generated suffix exceeds the provided suffix arrays,
-	it falls back to scientific-like suffix text.
-]]
-local function getGeneratedSuffix(index: number): string
-	if index <= 0 then
-		return ""
+	if n >= 1000 then
+		return "e" .. tostring(index * 3)
 	end
 
-	if index <= #Constants.SETS then
-		return Constants.SETS[index]
-	end
+	local ones = n % 10
+	local tens = math.floor(n / 10) % 10
+	local hundreds = math.floor(n / 100) % 10
 
-	index -= #Constants.SETS
+	local first = Constants.FIRST_ONES[ones + 1]
+	local second = Constants.SECOND_ONES[tens + 1]
+	local third = Constants.THIRD_ONES[hundreds + 1]
 
-	local firstIndex = index % 10
-	local secondIndex = math.floor(index / 10) % 10
-	local thirdIndex = math.floor(index / 100) % 10
-	local multIndex = math.floor(index / 1000) + 1
-
-	local first = Constants.FIRST_ONES[firstIndex + 1] or ""
-	local second = Constants.SECOND_ONES[secondIndex + 1] or ""
-	local third = Constants.THIRD_ONES[thirdIndex + 1] or ""
-	local mult = Constants.MULT_ONES[multIndex] or ("e" .. tostring(index * 3))
-
-	return first .. second .. third .. mult
+	return first .. second .. third
 end
 
 --[[
